@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@natr/the-trees": [
+        "dist/natr/the-trees"
+      ],
+      "@natr/the-trees/*": [
+        "dist/natr/the-trees/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

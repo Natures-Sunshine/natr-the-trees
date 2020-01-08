@@ -1,0 +1,16 @@
+<ngx-graph
+  class="chart-container"
+  *ngIf="gotdata"
+  [links]="links"
+  [nodes]="nodes"
+  [zoomToFit$]="zoomToFit$"
+  [layoutSettings]="layoutSettings"
+  #graphComponent
+>
+  <ng-template #nodeTemplate let-node>
+    <svg>
+      <circle r="10" cy="10" cx="10" [attr.fill]="'orange'"/>
+    </svg>
+  </ng-template>
+
+</ngx-graph>

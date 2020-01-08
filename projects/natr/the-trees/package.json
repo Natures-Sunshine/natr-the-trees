@@ -1,0 +1,13 @@
+{
+  "name": "@natr/the-trees",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^8.0.0",
+    "@angular/core": "^8.0.0",
+    "@swimlane/ngx-graph": "^6.2.0",
+    "@ngrx/effects": "^8.0.0",
+    "@ngrx/entity": "^8.0.0",
+    "@ngrx/store": "^8.0.0",
+    "@ngrx/store-devtools": "^8.0.0"
+  }
+}
