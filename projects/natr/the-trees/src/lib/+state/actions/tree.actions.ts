@@ -13,7 +13,7 @@ export const loadRemoteTreesAction = createAction(
 
 export const loadLocalTreesAction = createAction(
   loadRemoteTreesActionTypeName,
-  props<{treeModel: TreeModel}>()
+  props<{treeData: TreeModel}>()
 );
 
 export const loadTreesSuccess = createAction(

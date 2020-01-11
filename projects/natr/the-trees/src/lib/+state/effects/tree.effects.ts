@@ -37,7 +37,7 @@ export class TreeEffects {
       concatMap((actionProps, num) => {
           console.log('in effect, actionProps', actionProps);
           console.log('in effect thing', num);
-          return of(actionProps.treeModel)
+          return of(actionProps.treeData)
             .pipe(
               map(data => {
                   console.log('in tree effects data is ', data);

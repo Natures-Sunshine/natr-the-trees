@@ -116,7 +116,7 @@ export class TreeDataFacadeService {
   }
 
   dispatchLocalLoadTree(treeModel: TreeModel): void {
-    this.store.dispatch(loadLocalTreesAction({treeModel}));
+    this.store.dispatch(loadLocalTreesAction({treeData: treeModel}));
   }
 
 }

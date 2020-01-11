@@ -1,8 +1,9 @@
-import {Component, Input, OnInit, TemplateRef} from '@angular/core';
+import {Component, Inject, Input, OnInit, TemplateRef} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {TreeState} from '../../../../../natr/the-trees/src/lib/+state/reducers/tree.reducer';
 import {loadLocalTreesAction, loadRemoteTreesAction} from '../../../../../natr/the-trees/src/lib/+state/actions/tree.actions';
 import {TreeDataFacadeService} from '../../../../../natr/the-trees/src/lib/services/tree-data-facade.service';
+import {TREE_FEATURE_REDUCER_TOKEN} from '../../../../../natr/the-trees/src/lib/the-trees.module';
 
 @Component({
   selector: 'app-my-tree',
@@ -53,7 +54,8 @@ export class MyTreeComponent implements OnInit {
     }
   } as TreeState;
 
-  constructor(private treeDataFacade: TreeDataFacadeService) {
+  constructor(private treeDataFacade: TreeDataFacadeService, @Inject(TREE_FEATURE_REDUCER_TOKEN) private reducer) {
+    console.log(`${MyTreeComponent.name} reducer is`, reducer);
   }
 
   ngOnInit() {

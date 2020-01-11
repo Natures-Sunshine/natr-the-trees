@@ -50,6 +50,6 @@ export class RawTreeComponent implements OnInit {
 
   changeTree() {
     console.log('tree changed');
-    this.store.dispatch(loadLocalTreesAction({treeModel: this.treeState.treeData}));
+    this.store.dispatch(loadLocalTreesAction({treeData: this.treeState.treeData}));
   }
 }

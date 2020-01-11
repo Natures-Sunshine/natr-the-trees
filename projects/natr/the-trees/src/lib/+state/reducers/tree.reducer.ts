@@ -8,21 +8,19 @@ export interface TreeState {
   treeData: TreeModel;
 }
 
-export const initialState: TreeState = {
-  treeData: null
-};
+export const initialState: TreeState = null;
 
-const treeReducer = createReducer(
-  null,
+export const treeReducer = createReducer(
+  initialState,
 
-  on(TreeActions.loadLocalTreesAction, (state, props) => ({...state, treeData: props})),
+  on(TreeActions.loadLocalTreesAction, (state, props) => ({...state})),
   on(TreeActions.loadRemoteTreesAction, state => state),
   // on(TreeActions.loadTreesSuccess, (state, action: { type: string, data: TreeState }) => ({...state, treeData: action.data.treeData})),
   on(TreeActions.loadTreesSuccess,
-    (state, action: { type: string, treeData: TreeState }) => {
+    (state, props) => {
       console.log('in treeReducer state', state);
-      console.log('in treeReducer action', action);
-      return {...state, treeData: action.treeData};
+      console.log('in treeReducer props', props);
+      return {...state, treeData: props.treeData};
     }
   ),
   on(TreeActions.loadTreesFailure, (state, action) => state),
