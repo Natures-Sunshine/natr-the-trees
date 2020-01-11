@@ -2,6 +2,7 @@ import {Component, Input, OnInit, TemplateRef} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {TreeState} from '../../../../../natr/the-trees/src/lib/+state/reducers/tree.reducer';
 import {loadLocalTreesAction, loadRemoteTreesAction} from '../../../../../natr/the-trees/src/lib/+state/actions/tree.actions';
+import {TreeDataFacadeService} from '../../../../../natr/the-trees/src/lib/services/tree-data-facade.service';
 
 @Component({
   selector: 'app-my-tree',
@@ -52,7 +53,7 @@ export class MyTreeComponent implements OnInit {
     }
   } as TreeState;
 
-  constructor(private store: Store<{ tree: TreeState }>) {
+  constructor(private treeDataFacade: TreeDataFacadeService) {
   }
 
   ngOnInit() {
@@ -64,11 +65,11 @@ export class MyTreeComponent implements OnInit {
 
   changeTreeFromLocal() {
     console.log('tree changed from local');
-    this.store.dispatch(loadLocalTreesAction({treeModel: this.treeState.treeData}));
+    this.treeDataFacade.dispatchLocalLoadTree(this.treeState.treeData);
   }
 
   changeTreeFromRemote() {
     console.log('tree changed from remote');
-    this.store.dispatch(loadRemoteTreesAction({url: new URL('http://localhost:4200/assets/tree.json')}));
+    this.treeDataFacade.dispatchRemoteLoadTree(new URL('http://localhost:4200/assets/tree.json'));
   }
 }

@@ -4,14 +4,21 @@ import {concatMap, delay} from 'rxjs/operators';
 import {Edge, Node} from '@swimlane/ngx-graph';
 import {TreeModel} from '../models/tree.model';
 import {TypedAction} from '@ngrx/store/src/models';
-import {LoadTreesActionType} from '../+state/actions/tree.actions';
+import {
+  loadLocalTreesAction,
+  LoadLocalTreesActionType,
+  loadRemoteTreesAction,
+  LoadRemoteTreesActionType
+} from '../+state/actions/tree.actions';
+import {Store} from '@ngrx/store';
+import {TreeState} from '../+state/reducers/tree.reducer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TreeDataFacadeService {
 
-  constructor() {
+  constructor(private store: Store<TreeState>) {
   }
 
   nodes(): Observable<Node[]> {
@@ -104,8 +111,12 @@ export class TreeDataFacadeService {
       );
   }
 
-  dispatchRemoteLoadTree(action: TypedAction<LoadTreesActionType>, remoteUrl: URL): Observable<void> {
-    return EMPTY;
+  dispatchRemoteLoadTree(url: URL): void {
+    this.store.dispatch(loadRemoteTreesAction({url}));
+  }
+
+  dispatchLocalLoadTree(treeModel: TreeModel): void {
+    this.store.dispatch(loadLocalTreesAction({treeModel}));
   }
 
 }

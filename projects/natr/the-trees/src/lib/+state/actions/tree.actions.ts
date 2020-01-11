@@ -3,7 +3,8 @@ import {TreeModel} from '../../models/tree.model';
 
 export const loadLocalTreesActionTypeName = '[Tree] Load Local Trees';
 export const loadRemoteTreesActionTypeName = '[Tree] Load Remote Trees';
-export type LoadTreesActionType = '[Tree] Load Trees';
+export type LoadLocalTreesActionType = '[Tree] Load Local Trees';
+export type LoadRemoteTreesActionType = '[Tree] Load Remote Trees';
 
 export const loadRemoteTreesAction = createAction(
   loadLocalTreesActionTypeName,

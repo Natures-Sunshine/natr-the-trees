@@ -41,7 +41,7 @@
     "showcase": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {
+        "@ngrx/schematics:component": {
           "style": "scss"
         }
       },
@@ -159,6 +159,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "@natr/the-trees"
+    }
+  },
+  "defaultProject": "@natr/the-trees",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
