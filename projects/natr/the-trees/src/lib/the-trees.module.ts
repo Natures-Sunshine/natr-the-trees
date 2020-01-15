@@ -7,7 +7,7 @@ import {ActionReducer, ActionReducerMap, StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {TreeEffects} from './+state/effects/tree.effects';
 import * as fromTree from './+state/reducers/tree.reducer';
-import {reducer} from './+state/reducers/tree.reducer';
+import {reducer, treeReducer} from './+state/reducers/tree.reducer';
 
 export const TREE_FEATURE_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromTree.TreeState>>('Feature Reducers');
 
@@ -16,11 +16,11 @@ export function getReducer(): ActionReducer<any, any> {
   return reducer;
 }
 
-export const TREE_ACTION_REDUCER_TOKEN = new InjectionToken<ActionReducer<fromTree.TreeState>>('Feature Reducers');
+export const TREE_ACTION_REDUCER_TOKEN = new InjectionToken<ActionReducer<fromTree.TreeState>>('tree reducer');
 
 export function getTreeReducer(): ActionReducer<any, any> {
   // map of reducers
-  return reducer;
+  return treeReducer;
 }
 
 @NgModule({
@@ -37,6 +37,10 @@ export function getTreeReducer(): ActionReducer<any, any> {
     {
       provide: TREE_FEATURE_REDUCER_TOKEN,
       useFactory: getReducer
+    },
+    {
+      provide: TREE_ACTION_REDUCER_TOKEN,
+      useFactory: getTreeReducer
     }
   ]
 })

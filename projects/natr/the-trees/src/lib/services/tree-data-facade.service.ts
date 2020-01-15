@@ -1,15 +1,9 @@
 import {Injectable} from '@angular/core';
-import {EMPTY, Observable, of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {concatMap, delay} from 'rxjs/operators';
 import {Edge, Node} from '@swimlane/ngx-graph';
 import {TreeModel} from '../models/tree.model';
-import {TypedAction} from '@ngrx/store/src/models';
-import {
-  loadLocalTreesAction,
-  LoadLocalTreesActionType,
-  loadRemoteTreesAction,
-  LoadRemoteTreesActionType
-} from '../+state/actions/tree.actions';
+import {loadLocalTreesAction, loadRemoteTreesAction} from '../+state/actions/tree.actions';
 import {Store} from '@ngrx/store';
 import {TreeState} from '../+state/reducers/tree.reducer';
 

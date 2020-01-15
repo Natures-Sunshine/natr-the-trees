@@ -13,7 +13,7 @@ export const initialState: TreeState = null;
 export const treeReducer = createReducer(
   initialState,
 
-  on(TreeActions.loadLocalTreesAction, (state, props) => ({...state})),
+  on(TreeActions.loadLocalTreesAction, state => state),
   on(TreeActions.loadRemoteTreesAction, state => state),
   // on(TreeActions.loadTreesSuccess, (state, action: { type: string, data: TreeState }) => ({...state, treeData: action.data.treeData})),
   on(TreeActions.loadTreesSuccess,

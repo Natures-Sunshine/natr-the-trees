@@ -1,6 +1,6 @@
-import {Edge, Node} from '@swimlane/ngx-graph';
+import {Graph} from '@swimlane/ngx-graph';
 
-export interface TreeModel {
-  edges?: Edge[];
-  nodes?: Node[];
+// tslint:disable-next-line:no-empty-interface
+export interface TreeModel extends Graph {
 }
+

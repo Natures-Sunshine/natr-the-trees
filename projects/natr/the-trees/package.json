@@ -1,6 +1,6 @@
 {
   "name": "@natr/the-trees",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "peerDependencies": {
     "@angular/common": "^8.0.0",
     "@angular/core": "^8.0.0",

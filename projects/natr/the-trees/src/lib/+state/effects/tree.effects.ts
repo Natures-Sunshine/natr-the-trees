@@ -6,6 +6,7 @@ import {of} from 'rxjs';
 import * as TreeActions from '../actions/tree.actions';
 import {TreeState} from '../reducers/tree.reducer';
 import {HttpClient} from '@angular/common/http';
+import {TreeModel} from '../../models/tree.model';
 
 
 @Injectable()
@@ -15,12 +16,12 @@ export class TreeEffects {
     return this.actions$.pipe(
       ofType(TreeActions.loadRemoteTreesAction),
       concatMap((action, num) => {
-          console.log('in effect, action', action);
-          console.log('in effect thing', num);
+          console.log(`${TreeEffects.name}.loadRemoteTrees action`, action);
+          console.log(`${TreeEffects.name}.loadRemoteTrees num`, num);
           return this.httpClient.get(action.url.toString())
             .pipe(
-              map(data => {
-                  console.log('in tree effect data is ', data);
+              map((data: TreeModel) => {
+                  console.log(`${TreeEffects.name}.loadRemoteTrees pipe from http call data`, data);
                   return TreeActions.loadTreesSuccess({treeData: data});
                 }
               ),
@@ -35,12 +36,12 @@ export class TreeEffects {
     return this.actions$.pipe(
       ofType(TreeActions.loadLocalTreesAction),
       concatMap((actionProps, num) => {
-          console.log('in effect, actionProps', actionProps);
-          console.log('in effect thing', num);
+          console.log(`${TreeEffects.name}.loadLocalTrees action`, actionProps);
+          console.log(`${TreeEffects.name}.loadLocalTrees num`, num);
           return of(actionProps.treeData)
             .pipe(
               map(data => {
-                  console.log('in tree effects data is ', data);
+                  console.log(`${TreeEffects.name}.loadRemoteTrees pipe from 'of' data`, data);
                   return TreeActions.loadTreesSuccess({treeData: data});
                 }
               ),
