@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {catchError, concatMap, delay, map} from 'rxjs/operators';
+import {catchError, concatMap, map} from 'rxjs/operators';
 import {of} from 'rxjs';
 
 import * as TreeActions from '../actions/tree.actions';
-import {TreeState} from '../reducers/tree.reducer';
 import {HttpClient} from '@angular/common/http';
 import {TreeModel} from '../../models/tree.model';
 
