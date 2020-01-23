@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {concatMap, delay} from 'rxjs/operators';
-import {Edge, Node} from '@swimlane/ngx-graph';
+import {Edge} from '@swimlane/ngx-graph';
 import {TreeModel} from '../models/tree.model';
 import {loadLocalTreesAction, loadRemoteTreesAction} from '../+state/actions/tree.actions';
 import {Store} from '@ngrx/store';
 import {TreeState} from '../+state/reducers/tree.reducer';
+import {TreeNodeModel} from '../models/tree-node.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class TreeDataFacadeService {
   constructor(private store: Store<TreeState>) {
   }
 
-  nodes(): Observable<Node[]> {
+  nodes(): Observable<TreeNodeModel[]> {
     return of(
       [
         {

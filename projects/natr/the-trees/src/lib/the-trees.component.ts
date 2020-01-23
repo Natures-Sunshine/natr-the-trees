@@ -1,18 +1,23 @@
 import {
-  AfterContentChecked, AfterViewChecked, AfterViewInit,
+  AfterContentChecked,
+  AfterViewChecked,
+  AfterViewInit,
   Component,
   ContentChild,
   OnChanges,
   OnInit,
-  QueryList, SimpleChanges,
+  QueryList,
+  SimpleChanges,
   TemplateRef,
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import {Edge, Node, GraphComponent} from '@swimlane/ngx-graph';
+import {GraphComponent} from '@swimlane/ngx-graph';
 import {Subject} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {TreeState} from './+state/reducers/tree.reducer';
+import {TreeNodeModel} from './models/tree-node.model';
+import {TreeEdgeModel} from './models/tree-edge.model';
 
 @Component({
   selector: 'lib-the-trees',
@@ -28,9 +33,9 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
   @ViewChild('graphComponent', {static: false}) graphComponent: GraphComponent;
   @ViewChildren(GraphComponent) graphChildren: QueryList<GraphComponent>;
 
-  links: Edge[];
-  nodes: Node[];
-  gotdata = false;
+  links: TreeEdgeModel[];
+  nodes: TreeNodeModel[];
+  gotDate = false;
 
   zoomToFit$: Subject<boolean> = new Subject();
   viewSize: number[] = [600, 500];
@@ -49,7 +54,7 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
           if (tree && tree.treeData) {
             this.nodes = tree.treeData.nodes;
             this.links = tree.treeData.edges;
-            this.gotdata = true;
+            this.gotDate = true;
           }
         }
       );
