@@ -1,11 +1,12 @@
 <ngx-graph
-  class="chart-container"
+  #graphComponent
   *ngIf="gotDate"
+  [layoutSettings]="layoutSettings"
   [links]="links"
   [nodes]="nodes"
+  [view]="viewDimensions"
   [zoomToFit$]="zoomToFit$"
-  [layoutSettings]="layoutSettings"
-  #graphComponent
+  class="chart-container"
 >
   <ng-template #nodeTemplate let-node>
     <svg class="node">

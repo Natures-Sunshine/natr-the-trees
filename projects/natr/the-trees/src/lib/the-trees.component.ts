@@ -3,7 +3,7 @@ import {
   AfterViewChecked,
   AfterViewInit,
   Component,
-  ContentChild,
+  ContentChild, Input,
   OnChanges,
   OnInit,
   QueryList,
@@ -33,19 +33,19 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
   @ViewChild('graphComponent', {static: false}) graphComponent: GraphComponent;
   @ViewChildren(GraphComponent) graphChildren: QueryList<GraphComponent>;
 
-  links: TreeEdgeModel[];
-  nodes: TreeNodeModel[];
-  gotDate = false;
-
-  zoomToFit$: Subject<boolean> = new Subject();
-  viewSize: number[] = [600, 500];
-  layoutSettings = {
+  @Input() viewDimensions: number[] = [400, 800];
+  @Input() zoomToFit$: Subject<boolean> = new Subject<boolean>();
+  @Input() layoutSettings = {
     orientation: 'TB'
   };
 
 
+  links: TreeEdgeModel[];
+  nodes: TreeNodeModel[];
+  gotDate = false;
+
+
   constructor(private store: Store<{ tree: TreeState }>) {
-    this.zoomToFit$.next(true);
 
     this.store.select(state => state && state.tree)
       .subscribe(
@@ -62,6 +62,7 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
   }
 
   ngOnInit() {
+    this.zoomToFit$.next(true);
   }
 
 
@@ -106,5 +107,6 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('on changes', changes);
+    this.zoomToFit$.next(true);
   }
 }
