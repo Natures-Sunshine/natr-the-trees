@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {TreeState} from '../../../../../natr/the-trees/src/lib/+state/reducers/tree.reducer';
 import {loadLocalTreesAction} from '../../../../../natr/the-trees/src/lib/+state/actions/tree.actions';
@@ -6,7 +6,8 @@ import {loadLocalTreesAction} from '../../../../../natr/the-trees/src/lib/+state
 @Component({
   selector: 'app-raw-tree',
   templateUrl: './raw-tree.component.html',
-  styleUrls: ['./raw-tree.component.scss']
+  styleUrls: ['./raw-tree.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class RawTreeComponent implements OnInit {
   treeState = {
@@ -14,7 +15,10 @@ export class RawTreeComponent implements OnInit {
       nodes: [
         {
           id: 'first',
-          label: 'A'
+          label: 'A',
+          meta: {
+            class: 'node-inactive'
+          }
         },
         {
           id: 'second',
@@ -46,6 +50,7 @@ export class RawTreeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.dispatch(loadLocalTreesAction({treeData: this.treeState.treeData}));
   }
 
   changeTree() {

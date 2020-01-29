@@ -3,14 +3,16 @@ import {
   AfterViewChecked,
   AfterViewInit,
   Component,
-  ContentChild, Input,
+  ContentChild,
+  Input,
   OnChanges,
   OnInit,
   QueryList,
   SimpleChanges,
   TemplateRef,
   ViewChild,
-  ViewChildren
+  ViewChildren,
+  ViewEncapsulation
 } from '@angular/core';
 import {GraphComponent} from '@swimlane/ngx-graph';
 import {Subject} from 'rxjs';
@@ -46,11 +48,14 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
 
 
   constructor(private store: Store<{ tree: TreeState }>) {
+  }
 
+  ngOnInit() {
+    this.zoomToFit$.next(true);
     this.store.select(state => state && state.tree)
       .subscribe(
         tree => {
-          console.log('in tree-diagram tree is ', tree);
+          console.log(`${TheTreesComponent.name}.ngOnInit store sub tree`, tree);
           if (tree && tree.treeData) {
             this.nodes = tree.treeData.nodes;
             this.links = tree.treeData.edges;
@@ -58,11 +63,6 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
           }
         }
       );
-
-  }
-
-  ngOnInit() {
-    this.zoomToFit$.next(true);
   }
 
 
