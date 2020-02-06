@@ -8,6 +8,7 @@ import {RawTreeComponent} from './components/raw-tree/raw-tree.component';
 import {TheTreesModule} from '../../../natr/the-trees/src/lib/the-trees.module';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {EffectsModule} from '@ngrx/effects';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),

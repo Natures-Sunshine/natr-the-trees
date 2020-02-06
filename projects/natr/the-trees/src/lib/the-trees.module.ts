@@ -8,6 +8,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {TreeEffects} from './+state/effects/tree.effects';
 import * as fromTree from './+state/reducers/tree.reducer';
 import {reducer, treeReducer} from './+state/reducers/tree.reducer';
+import {CommonModule} from '@angular/common';
 
 export const TREE_FEATURE_REDUCER_TOKEN = new InjectionToken<ActionReducerMap<fromTree.TreeState>>('Feature Reducers');
 
@@ -26,7 +27,7 @@ export function getTreeReducer(): ActionReducer<any, any> {
 @NgModule({
   declarations: [TheTreesComponent],
   imports: [
-    NoopAnimationsModule,
+    CommonModule,
     NgxGraphModule,
     HttpClientModule,
     StoreModule.forFeature(fromTree.treeFeatureKey, TREE_FEATURE_REDUCER_TOKEN),
