@@ -20,6 +20,7 @@ import {Store} from '@ngrx/store';
 import {TreeState} from './+state/reducers/tree.reducer';
 import {TreeNodeModel} from './models/tree-node.model';
 import {TreeEdgeModel} from './models/tree-edge.model';
+import {TreeModel} from './models/tree.model';
 
 @Component({
   selector: 'lib-the-trees',
@@ -27,14 +28,15 @@ import {TreeEdgeModel} from './models/tree-edge.model';
   styleUrls: ['the-trees.component.scss']
 })
 export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecked, AfterContentChecked, OnChanges {
-  @ContentChild('linkTemplate', {static: false}) linkTemplate: TemplateRef<any>;
-  @ContentChild('nodeTemplate', {static: false}) nodeTemplate: TemplateRef<any>;
-  @ContentChild('clusterTemplate', {static: false}) clusterTemplate: TemplateRef<any>;
-  @ContentChild('defsTemplate', {static: false}) defsTemplate: TemplateRef<any>;
+  @ContentChild('linkTemplate') linkTemplate: TemplateRef<any>;
+  @ContentChild('nodeTemplate') nodeTemplate: TemplateRef<any>;
+  @ContentChild('clusterTemplate') clusterTemplate: TemplateRef<any>;
+  @ContentChild('defsTemplate') defsTemplate: TemplateRef<any>;
 
-  @ViewChild('graphComponent', {static: false}) graphComponent: GraphComponent;
+  @ViewChild('graphComponent') graphComponent: GraphComponent;
   @ViewChildren(GraphComponent) graphChildren: QueryList<GraphComponent>;
 
+  @Input() tree: TreeModel;
   @Input() viewDimensions: number[] = [400, 800];
   @Input() zoomToFit$: Subject<boolean> = new Subject<boolean>();
   @Input() layoutSettings = {
@@ -51,6 +53,10 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
   }
 
   ngOnInit() {
+    if (this.tree) {
+      this.nodes = this.tree.nodes;
+      this.links = this.tree.edges;
+    }
     this.zoomToFit$.next(true);
     this.store.select(state => state && state.tree)
       .subscribe(
