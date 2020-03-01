@@ -65,11 +65,10 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
       );
   }
 
-
   ngAfterViewInit() {
-    console.log('graphComp in after view', this.graphComponent);
+    console.log(`${TheTreesComponent.name}.ngAfterViewInit graphComponent in after view`, this.graphComponent);
     this.graphChildren.changes.subscribe((thing) => {
-      console.log('children change thing is ', thing);
+      console.log(`${TheTreesComponent.name}.ngAfterViewInit children change thing is `, thing);
 
       if (this.graphComponent) {
         if (this.nodeTemplate) {
@@ -95,7 +94,7 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
       this.layoutSettings = {...this.layoutSettings, orientation: 'TB'};
     }
 
-    console.log(this.layoutSettings);
+    console.log(`${TheTreesComponent.name}.changeLayout layoutSettings`, this.layoutSettings);
   }
 
   ngAfterViewChecked(): void {
@@ -106,7 +105,7 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('on changes', changes);
+    console.log(`${TheTreesComponent.name}.ngOnChanges`, changes);
     this.zoomToFit$.next(true);
   }
 }

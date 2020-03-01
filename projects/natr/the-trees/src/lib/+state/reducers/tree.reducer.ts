@@ -1,6 +1,7 @@
 import {Action, createReducer, on} from '@ngrx/store';
 import * as TreeActions from '../actions/tree.actions';
 import {TreeModel} from '../../models/tree.model';
+import * as lodash from 'lodash';
 
 export const treeFeatureKey = 'tree';
 
@@ -20,7 +21,7 @@ export const treeReducer = createReducer(
     (state, props) => {
       console.log('in treeReducer state', state);
       console.log('in treeReducer props', props);
-      return {...state, treeData: props.treeData};
+      return {...state, treeData: lodash.cloneDeep(props.treeData)};
     }
   ),
   on(TreeActions.loadTreesFailure, (state, action) => state),

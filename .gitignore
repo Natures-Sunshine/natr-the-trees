@@ -44,3 +44,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+projects/natr/the-trees/node_modules/
+projects/natr/the-trees/yarn.lock
+
