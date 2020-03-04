@@ -50,11 +50,10 @@ export class RawTreeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(loadLocalTreesAction({treeData: this.treeState.treeData}));
+    // this.store.dispatch(loadLocalTreesAction({treeData: this.treeState.treeData}));
   }
 
   changeTree() {
-    console.log('tree changed');
-    this.store.dispatch(loadLocalTreesAction({treeData: this.treeState.treeData}));
+    // this.store.dispatch(loadLocalTreesAction({treeData: this.treeState.treeData}));
   }
 }

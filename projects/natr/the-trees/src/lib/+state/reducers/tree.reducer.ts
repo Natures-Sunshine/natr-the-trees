@@ -14,14 +14,11 @@ export const initialState: TreeState = null;
 export const treeReducer = createReducer(
   initialState,
 
-  on(TreeActions.loadLocalTreesAction, state => state),
-  on(TreeActions.loadRemoteTreesAction, state => state),
-  // on(TreeActions.loadTreesSuccess, (state, action: { type: string, data: TreeState }) => ({...state, treeData: action.data.treeData})),
+  on(TreeActions.loadLocalTreesAction, state => lodash.cloneDeep(state)),
+  on(TreeActions.loadRemoteTreesAction, state => lodash.cloneDeep(state)),
   on(TreeActions.loadTreesSuccess,
     (state, props) => {
-      console.log('in treeReducer state', state);
-      console.log('in treeReducer props', props);
-      return {...state, treeData: lodash.cloneDeep(props.treeData)};
+      return {...lodash.cloneDeep(state), treeData: lodash.cloneDeep(props.treeData)};
     }
   ),
   on(TreeActions.loadTreesFailure, (state, action) => state),

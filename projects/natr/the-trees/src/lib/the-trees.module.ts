@@ -1,6 +1,5 @@
 import {InjectionToken, NgModule} from '@angular/core';
 import {TheTreesComponent} from './the-trees.component';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {NgxGraphModule} from '@swimlane/ngx-graph';
 import {HttpClientModule} from '@angular/common/http';
 import {ActionReducer, ActionReducerMap, StoreModule} from '@ngrx/store';

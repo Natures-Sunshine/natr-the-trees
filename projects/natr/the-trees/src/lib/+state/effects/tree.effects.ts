@@ -6,21 +6,24 @@ import {of} from 'rxjs';
 import * as TreeActions from '../actions/tree.actions';
 import {HttpClient} from '@angular/common/http';
 import {TreeModel} from '../../models/tree.model';
+import {HistorianService, Logging} from '@natr/historian';
 
 
+@Logging
 @Injectable()
 export class TreeEffects {
+  private logger: HistorianService;
 
   loadRemoteTrees$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(TreeActions.loadRemoteTreesAction),
       concatMap((action, num) => {
-          console.log(`${TreeEffects.name}.loadRemoteTrees action`, action);
-          console.log(`${TreeEffects.name}.loadRemoteTrees num`, num);
+          this.logger.debug(`${TreeEffects.name}.loadRemoteTrees action`, action);
+          this.logger.debug(`${TreeEffects.name}.loadRemoteTrees num`, num);
           return this.httpClient.get(action.url.toString())
             .pipe(
               map((data: TreeModel) => {
-                  console.log(`${TreeEffects.name}.loadRemoteTrees pipe from http call data`, data);
+                  this.logger.debug(`${TreeEffects.name}.loadRemoteTrees pipe from http call data`, data);
                   return TreeActions.loadTreesSuccess({treeData: data});
                 }
               ),
@@ -35,12 +38,12 @@ export class TreeEffects {
     return this.actions$.pipe(
       ofType(TreeActions.loadLocalTreesAction),
       concatMap((actionProps, num) => {
-          console.log(`${TreeEffects.name}.loadLocalTrees action`, actionProps);
-          console.log(`${TreeEffects.name}.loadLocalTrees num`, num);
+          this.logger.debug(`${TreeEffects.name}.loadLocalTrees action`, actionProps);
+          this.logger.debug(`${TreeEffects.name}.loadLocalTrees num`, num);
           return of(actionProps.treeData)
             .pipe(
               map(data => {
-                  console.log(`${TreeEffects.name}.loadRemoteTrees pipe from 'of' data`, data);
+                  this.logger.debug(`${TreeEffects.name}.loadRemoteTrees pipe from 'of' data`, data);
                   return TreeActions.loadTreesSuccess({treeData: data});
                 }
               ),

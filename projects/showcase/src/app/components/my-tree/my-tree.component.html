@@ -3,7 +3,9 @@
   <button (click)="changeTreeFromRemote()">Change Tree From Remote</button>
 </div>
 <div id="tree">
-  <lib-the-trees>
+  <lib-the-trees
+    [tree]="treeState.treeData"
+  >
     <ng-template #nodeTemplate let-node>
       <ng-container [ngSwitch]="node.id">
         <ng-template ngSwitchCase="1">

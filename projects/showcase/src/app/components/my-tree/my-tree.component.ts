@@ -1,10 +1,10 @@
-import {Component, Inject, Input, OnInit, TemplateRef} from '@angular/core';
-import {Store} from '@ngrx/store';
+import {Component, Inject, OnInit} from '@angular/core';
 import {TreeState} from '../../../../../natr/the-trees/src/lib/+state/reducers/tree.reducer';
-import {loadLocalTreesAction, loadRemoteTreesAction} from '../../../../../natr/the-trees/src/lib/+state/actions/tree.actions';
 import {TreeDataFacadeService} from '../../../../../natr/the-trees/src/lib/services/tree-data-facade.service';
-import {TREE_ACTION_REDUCER_TOKEN, TREE_FEATURE_REDUCER_TOKEN} from '../../../../../natr/the-trees/src/lib/the-trees.module';
+import {TREE_ACTION_REDUCER_TOKEN} from '../../../../../natr/the-trees/src/lib/the-trees.module';
+import {HistorianService, Logging} from '@natr/historian';
 
+@Logging
 @Component({
   selector: 'app-my-tree',
   templateUrl: './my-tree.component.html',
@@ -54,24 +54,25 @@ export class MyTreeComponent implements OnInit {
     }
   } as TreeState;
 
-  constructor(private treeDataFacade: TreeDataFacadeService, @Inject(TREE_ACTION_REDUCER_TOKEN) private reducer) {
-    console.log(`${MyTreeComponent.name} reducer is`, reducer);
+  private logger: HistorianService;
+
+  constructor(private treeDataFacade: TreeDataFacadeService) {
   }
 
   ngOnInit() {
   }
 
   nodeClicked(node) {
-    console.log(node);
+    this.logger.debug('node is', node);
   }
 
   changeTreeFromLocal() {
-    console.log('tree changed from local');
+    this.logger.debug('tree changed from local');
     this.treeDataFacade.dispatchLocalLoadTree(this.treeState.treeData);
   }
 
   changeTreeFromRemote() {
-    console.log('tree changed from remote');
+    this.logger.debug('tree changed from remote');
     this.treeDataFacade.dispatchRemoteLoadTree(new URL('http://localhost:4200/assets/tree.json'));
   }
 }
