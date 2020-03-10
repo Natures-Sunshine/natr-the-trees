@@ -913,30 +913,30 @@
   resolved "https://registry.yarnpkg.com/@natr/historian/-/historian-0.0.1.tgz#241035f41c10baa14ee1ccb18fe7749c9974303d"
   integrity sha512-+tn6WsbdRoTblqsa6WYdhJ5Py1OBvYmRaAGKJ6EBVCEbio+UDfb6LY+xuCyF6/XJKTjKONXhvG/xTipqHgIVLA==
 
-"@ngrx/effects@9.0.0-beta.2":
-  version "9.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-9.0.0-beta.2.tgz#5e13b50ecd2bad247ebe0d81f62eeaab27af33bc"
-  integrity sha512-3l0XJvxK6U8MeAzaRNqEaWVos/3bDv8APMK6XNE1OkFPn+sV58nOJ+5BnS8KsDckXRRSt9YqMVE13QZYI5AmUA==
+"@ngrx/effects@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-9.0.0.tgz#fe9956911621183f7d1d75c606578cfa25750b73"
+  integrity sha512-6Rq7FsNZK26HqYlpOGCglKLenIkVOOKE0y6D/8KXjEJ1JlZWi00fdI7poclBGjm9pvMBGXfJA8a9MKuxb/t9cA==
 
-"@ngrx/entity@9.0.0-beta.2":
-  version "9.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/entity/-/entity-9.0.0-beta.2.tgz#03f617e13a445b33b9c3e88927d67718c53d7265"
-  integrity sha512-MZfK+CguZkAsezZp6Tl0te4WwNe90u4anGbMrcaySpsgQa3ZwlE/pyDE87HZaTVErZ8w6k6Je5TG0VADV4DZdA==
+"@ngrx/entity@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/entity/-/entity-9.0.0.tgz#7a918601794c6adce3c9e7c471ecd7f923e50a33"
+  integrity sha512-0NQ+ppwiLuXtRZ2t79qdudbJhGlmuX2Qh6ORF9hplQoQn8Nl3BUp/TrH8SaAwISbg/B4EOhLWFmLVkXN8HZL8w==
 
-"@ngrx/schematics@9.0.0-beta.2":
-  version "9.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/schematics/-/schematics-9.0.0-beta.2.tgz#9fb8ad67782be71406b267f6cee1d896d8da85cf"
-  integrity sha512-yJEOk5b1TqIIanIT6e7rfWFv0RmgIDG3KYUfn3y7XBo8PmDUxmXGwyUoFxI5gHjH5Iner++3K8nvsiJwDoMdig==
+"@ngrx/schematics@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/schematics/-/schematics-9.0.0.tgz#cb78b2b87c9d880b63df459517b37439af735c38"
+  integrity sha512-lnACu54m0814fhXOW88cMXnh9igM6D9gAZ8M+1FYiAfylPv8kX5E4aV0x+stlcIrC9h9fEB+EXR+f6RWI4XOvA==
 
-"@ngrx/store-devtools@9.0.0-beta.2":
-  version "9.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-9.0.0-beta.2.tgz#4cee3b3db9f476b907a6ce1d724293558146e8ee"
-  integrity sha512-i+ucPyh/K2En5rPgZRxQNR8yaUtJ6vTB1yJYJkicS5lDlnHf7K7f5mNCxVFphFNlHdMp1u2vvAVjgdvU0ZN1kQ==
+"@ngrx/store-devtools@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-9.0.0.tgz#2eba2739f4a4c90f6cdd0036fb935162643ed435"
+  integrity sha512-Vj8sj8GclbSbnYCS8eqZXTOYDdip1nnjKhkYClUg2oFPh67haaCmvh7TXITnX8PpgDtj5akF84Xw9/1HRiG8mg==
 
-"@ngrx/store@9.0.0-beta.2":
-  version "9.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-9.0.0-beta.2.tgz#b9d62203ea3cda7df5dde64ade41e968162e841b"
-  integrity sha512-pduU22BIsGSLpS5lB+xEoctICGEoYDopeRkTxGmkZvIj/yX5QIiv5m8I+a0E4MWJVpXeeap1MPWL0cVrXHpKog==
+"@ngrx/store@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-9.0.0.tgz#ef45e241ba9cf401d5280fa99b09f2fb3fc3278d"
+  integrity sha512-QnmfXJ4G2jp+vFaqT5Qfp6h0J9OHxfDKI2RbnMU93Tq1Xd/WVPzXnOQGjILBjwwWI6RFkSdIpUoQONr7VOW63g==
 
 "@ngtools/webpack@9.0.4":
   version "9.0.4"

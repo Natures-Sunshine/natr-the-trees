@@ -54,7 +54,7 @@ export class MyTreeComponent implements OnInit {
     }
   } as TreeState;
 
-  private logger: HistorianService;
+  logger: HistorianService;
 
   constructor(private treeDataFacade: TreeDataFacadeService) {
   }

@@ -77,25 +77,34 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
   }
 
   ngAfterViewInit() {
-    this.logger.debug(`${TheTreesComponent.name}.ngAfterViewInit graphComponent in after view`, this.graphComponent);
+    this.setComponents();
+    this.logger.debug(`.ngAfterViewInit graphComponent in after view`, this.graphComponent);
+    this.logger.debug(`.ngAfterViewInit graphChildren`, this.graphChildren);
+    this.logger.debug(`.ngAfterViewInit nodeTemplate`, this.nodeTemplate);
+    this.logger.debug(`.ngAfterViewInit linkTemplate`, this.linkTemplate);
+    this.logger.debug(`.ngAfterViewInit clusterTemplate`, this.clusterTemplate);
+    this.logger.debug(`.ngAfterViewInit defsTemplate`, this.defsTemplate);
     this.graphChildren.changes.subscribe((thing) => {
       this.logger.debug(`${TheTreesComponent.name}.ngAfterViewInit children change thing is `, thing);
-
-      if (this.graphComponent) {
-        if (this.nodeTemplate) {
-          this.graphComponent.nodeTemplate = this.nodeTemplate;
-        }
-        if (this.linkTemplate) {
-          this.graphComponent.linkTemplate = this.linkTemplate;
-        }
-        if (this.clusterTemplate) {
-          this.graphComponent.clusterTemplate = this.clusterTemplate;
-        }
-        if (this.defsTemplate) {
-          this.graphComponent.defsTemplate = this.defsTemplate;
-        }
-      }
+      this.setComponents();
     });
+  }
+
+  private setComponents() {
+    if (this.graphComponent) {
+      if (this.nodeTemplate) {
+        this.graphComponent.nodeTemplate = this.nodeTemplate;
+      }
+      if (this.linkTemplate) {
+        this.graphComponent.linkTemplate = this.linkTemplate;
+      }
+      if (this.clusterTemplate) {
+        this.graphComponent.clusterTemplate = this.clusterTemplate;
+      }
+      if (this.defsTemplate) {
+        this.graphComponent.defsTemplate = this.defsTemplate;
+      }
+    }
   }
 
   changeLayout(): void {
