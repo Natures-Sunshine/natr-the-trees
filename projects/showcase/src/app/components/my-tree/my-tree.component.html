@@ -5,6 +5,7 @@
 <div id="tree">
   <lib-the-trees
     [tree]="treeState.treeData"
+    [treeAttributes]="treeAttributes"
   >
     <ng-template #nodeTemplate let-node>
       <ng-container [ngSwitch]="node.id">

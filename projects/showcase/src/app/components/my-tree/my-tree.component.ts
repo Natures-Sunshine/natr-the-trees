@@ -3,6 +3,7 @@ import {TreeState} from '../../../../../natr/the-trees/src/lib/+state/reducers/t
 import {TreeDataFacadeService} from '../../../../../natr/the-trees/src/lib/services/tree-data-facade.service';
 import {TREE_ACTION_REDUCER_TOKEN} from '../../../../../natr/the-trees/src/lib/the-trees.module';
 import {HistorianService, Logging} from '@natr/historian';
+import {TreeAttributesModel} from '../../../../../natr/the-trees/src/lib/models/tree-attributes.model';
 
 @Logging
 @Component({
@@ -54,9 +55,12 @@ export class MyTreeComponent implements OnInit {
     }
   } as TreeState;
 
+  treeAttributes = {draggingEnabled: false, enableZoom: true} as TreeAttributesModel;
+
   logger: HistorianService;
 
   constructor(private treeDataFacade: TreeDataFacadeService) {
+    this.logger.debug('my tree');
   }
 
   ngOnInit() {

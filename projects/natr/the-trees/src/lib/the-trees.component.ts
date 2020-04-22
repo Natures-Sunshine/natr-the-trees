@@ -23,6 +23,7 @@ import {Subject} from 'rxjs';
 
 import * as lo from 'lodash';
 import {HistorianService, Logging} from '@natr/historian';
+import {TreeAttributesModel} from './models/tree-attributes.model';
 
 @Logging
 @Component({
@@ -31,6 +32,31 @@ import {HistorianService, Logging} from '@natr/historian';
   styleUrls: ['the-trees.component.scss']
 })
 export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecked, AfterContentChecked, OnChanges {
+
+  constructor(private store: Store<{ tree: TreeState }>) {
+    this.logger.debug('tree attributes before', this.treeAttributes);
+    // this.treeAttributes = {...TheTreesComponent.attributeDefaults, ...this.treeAttributes};
+    // this.logger.debug('tree attributes after', this.treeAttributes);
+  }
+
+  private attributeDefaults = {
+    nodes: [],
+    links: [],
+    clusters: [],
+    layout: 'dagre',
+    draggingEnabled: true,
+    panningEnabled: true,
+    panningAxis: 'both',
+    enableZoom: true,
+    animate: false,
+    zoomSpeed: 0.1,
+    minZoomLevel: 0.1,
+    maxZoomLevel: 4,
+    autoZoom: false,
+    panOnZoom: true,
+    autoCenter: false
+  } as TreeAttributesModel;
+
   @ContentChild('linkTemplate') linkTemplate: TemplateRef<any>;
   @ContentChild('nodeTemplate') nodeTemplate: TemplateRef<any>;
   @ContentChild('clusterTemplate') clusterTemplate: TemplateRef<any>;
@@ -42,21 +68,18 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
   @Input() tree: TreeModel;
   @Input() viewDimensions: number[] = [400, 800];
   @Input() zoomToFit$: Subject<boolean> = new Subject<boolean>();
+  @Input() treeAttributes;
   @Input() layoutSettings = {
     orientation: 'TB'
   };
-
-
   links: TreeEdgeModel[];
   nodes: TreeNodeModel[];
   gotData = false;
 
   private logger: HistorianService;
 
-  constructor(private store: Store<{ tree: TreeState }>) {
-  }
-
   ngOnInit() {
+    this.logger.debug('tree attributes before', this.treeAttributes);
     if (this.tree) {
       this.gotData = true;
       this.nodes = lo.cloneDeep(this.tree.nodes);
@@ -66,7 +89,7 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
     this.store.select(state => state && state.tree)
       .subscribe(
         tree => {
-          this.logger.debug(`ngOnInit store sub tree`, tree);
+          this.logger.debug(`store sub tree`, tree);
           if (tree && tree.treeData) {
             this.nodes = lo.cloneDeep(tree.treeData.nodes);
             this.links = lo.cloneDeep(tree.treeData.edges);
@@ -74,18 +97,26 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
           }
         }
       );
+    this.setDefaults();
+  }
+
+  private setDefaults() {
+    this.logger.debug('tree attributes before', this.treeAttributes);
+    this.treeAttributes = {...this.attributeDefaults, ...this.treeAttributes};
+    this.logger.debug('tree attributes after', this.treeAttributes);
   }
 
   ngAfterViewInit() {
+    this.logger.debug('tree attributes before', this.treeAttributes);
     this.setComponents();
-    this.logger.debug(`.ngAfterViewInit graphComponent in after view`, this.graphComponent);
-    this.logger.debug(`.ngAfterViewInit graphChildren`, this.graphChildren);
-    this.logger.debug(`.ngAfterViewInit nodeTemplate`, this.nodeTemplate);
-    this.logger.debug(`.ngAfterViewInit linkTemplate`, this.linkTemplate);
-    this.logger.debug(`.ngAfterViewInit clusterTemplate`, this.clusterTemplate);
-    this.logger.debug(`.ngAfterViewInit defsTemplate`, this.defsTemplate);
+    this.logger.debug(`graphComponent in after view`, this.graphComponent);
+    this.logger.debug(`graphChildren`, this.graphChildren);
+    this.logger.debug(`nodeTemplate`, this.nodeTemplate);
+    this.logger.debug(`linkTemplate`, this.linkTemplate);
+    this.logger.debug(`clusterTemplate`, this.clusterTemplate);
+    this.logger.debug(`defsTemplate`, this.defsTemplate);
     this.graphChildren.changes.subscribe((thing) => {
-      this.logger.debug(`${TheTreesComponent.name}.ngAfterViewInit children change thing is `, thing);
+      this.logger.debug(`children change thing is `, thing);
       this.setComponents();
     });
   }
@@ -107,25 +138,26 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
     }
   }
 
-  changeLayout(): void {
-    if (this.layoutSettings.orientation === 'TB') {
-      this.layoutSettings = {...this.layoutSettings, orientation: 'BT'};
-    } else {
-      this.layoutSettings = {...this.layoutSettings, orientation: 'TB'};
-    }
+  zoomChange(event) {
+    this.logger.debug('event is', event);
+  }
 
-    this.logger.debug(`${TheTreesComponent.name}.changeLayout layoutSettings`, this.layoutSettings);
+  clickHandler(event) {
+    this.logger.debug('event is', event);
   }
 
   ngAfterViewChecked(): void {
+    // this.logger.debug('tree attributes before', this.treeAttributes);
 
   }
 
   ngAfterContentChecked(): void {
+    // this.logger.debug('tree attributes before', this.treeAttributes);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.logger.debug(`${TheTreesComponent.name}.ngOnChanges`, changes);
+    this.logger.debug('changes', changes);
+
     this.zoomToFit$.next(true);
   }
 }

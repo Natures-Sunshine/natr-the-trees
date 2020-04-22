@@ -3,8 +3,8 @@ import {TreeModel} from '../../models/tree.model';
 
 export const loadLocalTreesActionTypeName = '[Tree] Load Local Trees';
 export const loadRemoteTreesActionTypeName = '[Tree] Load Remote Trees';
-export type LoadLocalTreesActionType = '[Tree] Load Local Trees';
-export type LoadRemoteTreesActionType = '[Tree] Load Remote Trees';
+export const loadTreesSuccessActionTypeName = '[Tree] Load Trees Success';
+export const loadTreesFailureActionTypeName = '[Tree] Load Trees Failure';
 
 export const loadRemoteTreesAction = createAction(
   loadLocalTreesActionTypeName,
@@ -17,11 +17,11 @@ export const loadLocalTreesAction = createAction(
 );
 
 export const loadTreesSuccess = createAction(
-  '[Tree] Load Trees Success',
+  loadTreesSuccessActionTypeName,
   props<{ treeData: TreeModel }>()
 );
 
 export const loadTreesFailure = createAction(
-  '[Tree] Load Trees Failure',
+  loadTreesFailureActionTypeName,
   props<{ error: any }>()
 );

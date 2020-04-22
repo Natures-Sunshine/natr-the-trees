@@ -16,50 +16,6 @@ export class TreeDataFacadeService {
   constructor(private store: Store<TreeState>) {
   }
 
-  nodes(): Observable<TreeNodeModel[]> {
-    return of(
-      [
-        {
-          id: 'first',
-          label: 'A'
-        }, {
-        id: 'second',
-        label: 'B'
-      }, {
-        id: 'third',
-        label: 'C'
-      },
-        {
-          id: 'forth',
-          label: 'D'
-        }
-      ]
-    );
-  }
-
-  edges(): Observable<Edge[]> {
-    return of(
-      [
-        {
-          id: 'a',
-          source: 'first',
-          target: 'second',
-          label: 'is parent of'
-        }, {
-        id: 'b',
-        source: 'second',
-        target: 'third',
-        label: 'custom label'
-      },
-        {
-          id: 'c',
-          source: 'first',
-          target: 'forth',
-          label: 'custom label'
-        }
-      ]
-    );
-  }
 
   root(): Observable<TreeModel> {
     return of(
