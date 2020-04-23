@@ -10,3 +10,13 @@ export const selectTreeData = createSelector(
   selectTreeState,
   (state: TreeState) => state && state.treeData
 );
+
+export const selectZoomData = createSelector(
+  selectTreeState,
+  (state: TreeState) => state && state.zoom
+);
+
+export const selectTreeClick = createSelector(
+  selectTreeState,
+  (state: TreeState) => state && state.clickEvent
+);

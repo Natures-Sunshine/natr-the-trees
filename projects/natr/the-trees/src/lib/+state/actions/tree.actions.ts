@@ -5,6 +5,8 @@ export const loadLocalTreesActionTypeName = '[Tree] Load Local Trees';
 export const loadRemoteTreesActionTypeName = '[Tree] Load Remote Trees';
 export const loadTreesSuccessActionTypeName = '[Tree] Load Trees Success';
 export const loadTreesFailureActionTypeName = '[Tree] Load Trees Failure';
+export const treeZoomActionTypeName = '[Tree] Zoom';
+export const treeClickActionTypeName = '[Tree] Zoom';
 
 export const loadRemoteTreesAction = createAction(
   loadLocalTreesActionTypeName,
@@ -24,4 +26,14 @@ export const loadTreesSuccess = createAction(
 export const loadTreesFailure = createAction(
   loadTreesFailureActionTypeName,
   props<{ error: any }>()
+);
+
+export const treeZoom = createAction(
+  treeZoomActionTypeName,
+  props<{zoom: number}>()
+);
+
+export const treeClick = createAction(
+  treeClickActionTypeName,
+  props<{clickEvent: MouseEvent}>()
 );

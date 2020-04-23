@@ -4,9 +4,10 @@ import {concatMap, delay} from 'rxjs/operators';
 import {Edge} from '@swimlane/ngx-graph';
 import {TreeModel} from '../models/tree.model';
 import {loadLocalTreesAction, loadRemoteTreesAction} from '../+state/actions/tree.actions';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {TreeState} from '../+state/reducers/tree.reducer';
 import {TreeNodeModel} from '../models/tree-node.model';
+import {selectTreeClick, selectZoomData} from '../+state/selectors/tree.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -14,52 +15,6 @@ import {TreeNodeModel} from '../models/tree-node.model';
 export class TreeDataFacadeService {
 
   constructor(private store: Store<TreeState>) {
-  }
-
-
-  root(): Observable<TreeModel> {
-    return of(
-      {
-        nodes: [
-          {
-            id: 'first',
-            label: 'A'
-          }, {
-            id: 'second',
-            label: 'B'
-          }, {
-            id: 'third',
-            label: 'C'
-          },
-          {
-            id: 'forth',
-            label: 'D'
-          }
-        ],
-        edges: [
-          {
-            id: 'a',
-            source: 'first',
-            target: 'second',
-            label: 'is parent of'
-          }, {
-            id: 'b',
-            source: 'second',
-            target: 'third',
-            label: 'custom label'
-          },
-          {
-            id: 'c',
-            source: 'first',
-            target: 'forth',
-            label: 'custom label'
-          }
-        ]
-      }
-    )
-      .pipe(
-        concatMap(item => of(item).pipe(delay(10000)))
-      );
   }
 
   dispatchRemoteLoadTree(url: URL): void {
@@ -70,4 +25,11 @@ export class TreeDataFacadeService {
     this.store.dispatch(loadLocalTreesAction({treeData: treeModel}));
   }
 
+  zoomLevel(): Observable<number> {
+    return this.store.select(selectZoomData);
+  }
+
+  treeClick(): Observable<MouseEvent> {
+    return this.store.select(selectTreeClick);
+  }
 }

@@ -24,6 +24,8 @@ import {Subject} from 'rxjs';
 import * as lo from 'lodash';
 import {HistorianService, Logging} from '@natr/historian';
 import {TreeAttributesModel} from './models/tree-attributes.model';
+import {treeClick, treeZoom} from './+state/actions/tree.actions';
+import {selectTreeData} from './+state/selectors/tree.selectors';
 
 @Logging
 @Component({
@@ -86,13 +88,13 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
       this.links = lo.cloneDeep(this.tree.edges);
     }
     this.zoomToFit$.next(true);
-    this.store.select(state => state && state.tree)
+    this.store.select(selectTreeData)
       .subscribe(
         tree => {
           this.logger.debug(`store sub tree`, tree);
-          if (tree && tree.treeData) {
-            this.nodes = lo.cloneDeep(tree.treeData.nodes);
-            this.links = lo.cloneDeep(tree.treeData.edges);
+          if (tree) {
+            this.nodes = lo.cloneDeep(tree.nodes);
+            this.links = lo.cloneDeep(tree.edges);
             this.gotData = true;
           }
         }
@@ -138,12 +140,12 @@ export class TheTreesComponent implements OnInit, AfterViewInit, AfterViewChecke
     }
   }
 
-  zoomChange(event) {
-    this.logger.debug('event is', event);
+  zoomChange(event: number) {
+    this.store.dispatch(treeZoom({zoom: event}));
   }
 
-  clickHandler(event) {
-    this.logger.debug('event is', event);
+  clickHandler(event: MouseEvent) {
+    this.store.dispatch(treeClick({clickEvent: event}));
   }
 
   ngAfterViewChecked(): void {

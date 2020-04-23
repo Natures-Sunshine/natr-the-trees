@@ -1,7 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TreeState} from '../../../../../natr/the-trees/src/lib/+state/reducers/tree.reducer';
 import {TreeDataFacadeService} from '../../../../../natr/the-trees/src/lib/services/tree-data-facade.service';
-import {TREE_ACTION_REDUCER_TOKEN} from '../../../../../natr/the-trees/src/lib/the-trees.module';
 import {HistorianService, Logging} from '@natr/historian';
 import {TreeAttributesModel} from '../../../../../natr/the-trees/src/lib/models/tree-attributes.model';
 
@@ -64,6 +63,15 @@ export class MyTreeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.treeDataFacade.zoomLevel()
+      .subscribe(zoom => {
+        this.logger.debug('zoom is ', zoom);
+      });
+
+    this.treeDataFacade.treeClick()
+      .subscribe(click => {
+        this.logger.debug('click is ', click);
+      });
   }
 
   nodeClicked(node) {
